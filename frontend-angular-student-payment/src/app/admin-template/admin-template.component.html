@@ -1,0 +1,65 @@
+<!--<p>Creation d'une barre de navigation avec angular/material</p>-->
+<mat-toolbar color="primary">
+<!--  creation du deroulant-->
+  <!--pour faire disparaitre le menu et apparaitre quand on clic on utilise des id comme #monDrawer-->
+
+  <button mat-icon-button (click)="monDrawer.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+<!--  pour mettre les boutons a droite on fait :-->
+  <span style="flex: auto"></span>
+  <button mat-button  routerLink="/admin/home">Accueil</button>
+  <button mat-button routerLink="/admin/profile">Profil</button>
+<!--  pour faire le menu deroulant-->
+  <button *ngIf="authServices.roles.includes('ADMIN')" mat-button [mat-menu-trigger-for]="importMenu">
+    <mat-icon iconPositionEnd>keyboard_arrow_down</mat-icon>
+    Import
+  </button>
+  <mat-menu #importMenu>
+    <button mat-menu-item routerLink="/admin/listEtudiants">Afficher les Etudiants</button>
+    <button mat-menu-item routerLink="/admin/listPaiements">Afficher les Payements</button>
+  </mat-menu>
+<!--  on affiche l'utilisateur qui est authentifier-->
+<button mat-button *ngIf="authServices.isAuthentificated">
+  {{authServices.username}}
+</button>
+  <button mat-raised-button color="accent" (click)="logout()">
+    Logout
+  </button>
+</mat-toolbar>
+
+
+<!--pour les sous menu du dashboad-->
+<!--pour faire disparaitre le menu et apparaitre quand on clic on utilise des id comme #monDrawer-->
+<mat-drawer-container>
+  <mat-drawer #monDrawer opened="true" mode="side" position="start">
+    <mat-list>
+      <mat-list-item>
+        <button mat-button routerLink="/admin/dashboard">
+          <mat-icon>dashboard</mat-icon>
+          Dashboard
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button routerLink="/admin/etudiants">
+          <mat-icon></mat-icon>
+          Etudiants
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button routerLink="/admin/paiements">
+          <mat-icon></mat-icon>
+          Paiements
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div style="min-height: 600px">
+      <!--    ici on met le contenu de notre application pour chaque page -->
+      <router-outlet></router-outlet>
+    </div>
+
+  </mat-drawer-content>
+</mat-drawer-container>

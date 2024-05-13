@@ -1,0 +1,64 @@
+<div class="container">
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        Paiements
+      </mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+<!--      on colle le code de angular/material.io/table-->
+
+
+
+      <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z1">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header> ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header> Date </th>
+          <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="montant">
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header> Montant </th>
+          <td mat-cell *matCellDef="let element"> {{element.montant}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header> Type de Paiement </th>
+          <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+        </ng-container>
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header> Status </th>
+          <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+        </ng-container>
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="firstName">
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header> Nom de l'etudiantt </th>
+          <td mat-cell *matCellDef="let element"> {{element.student.firstName}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [length]="100"
+                     [pageSize]="10"
+                     [pageSizeOptions]="[5, 10, 20,30,40,50, 100]"
+                     aria-label="Select page">
+      </mat-paginator>
+
+
+    </mat-card-content>
+  </mat-card>
+</div>
